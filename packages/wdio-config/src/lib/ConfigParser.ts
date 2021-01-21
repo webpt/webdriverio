@@ -66,7 +66,7 @@ export default class ConfigParser {
             /**
              * detect WebDriver backend
              */
-            this._config = merge(detectBackend(this._config), this._config, MERGE_OPTIONS)
+            this._config = merge(detectBackend(this._config, this._capabilities), this._config, MERGE_OPTIONS)
 
             /**
              * remove `watch` from config as far as it can be only passed as command line argument
@@ -120,7 +120,7 @@ export default class ConfigParser {
             this._config.exclude = this.setFilePathToFilterOptions(exclude, this._config.exclude!)
         }
 
-        this._config = merge(detectBackend(this._config), this._config, MERGE_OPTIONS)
+        this._config = merge(detectBackend(this._config, this._capabilities), this._config, MERGE_OPTIONS)
     }
 
     /**

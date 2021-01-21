@@ -22,6 +22,7 @@
     "url": "https://github.com/webdriverio/webdriverio/issues"
   },
   "dependencies": {
+    "@types/which": "^2.0.0",
     "@wdio/config": "6.12.1",
     "@wdio/logger": "6.10.10",
     "@wdio/protocols": "6.12.0",

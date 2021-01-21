@@ -124,7 +124,7 @@ describe('detectBackend', () => {
 
     describe('saucelabs legacy rdc', () => {
         it('should detect saucelabs rdc user that had not defaulted a region', () => {
-            const caps = detectBackend({ capabilities: { testobject_api_key: '123' } })
+            const caps = detectBackend({}, { testobject_api_key: '123' })
             expect(caps.hostname).toBe('us1.appium.testobject.com')
             expect(caps.port).toBe(443)
             expect(caps.path).toBe('/wd/hub')
@@ -132,7 +132,7 @@ describe('detectBackend', () => {
         })
 
         it('should detect saucelabs us rdc user', () => {
-            const caps = detectBackend({ region: 'us', capabilities: { testobject_api_key: '123' } })
+            const caps = detectBackend({ region: 'us' }, { testobject_api_key: '123' })
             expect(caps.hostname).toBe('us1.appium.testobject.com')
             expect(caps.port).toBe(443)
             expect(caps.path).toBe('/wd/hub')
@@ -140,7 +140,7 @@ describe('detectBackend', () => {
         })
 
         it('should detect saucelabs eu rdc user', () => {
-            const caps = detectBackend({ region: 'eu', capabilities: { testobject_api_key: '123' } })
+            const caps = detectBackend({ region: 'eu' }, { testobject_api_key: '123' })
             expect(caps.hostname).toBe('eu1.appium.testobject.com')
             expect(caps.port).toBe(443)
             expect(caps.path).toBe('/wd/hub')
@@ -150,12 +150,19 @@ describe('detectBackend', () => {
 
     describe('saucelabs visual', () => {
         it('should not detect sauce visual if api key is missing', () => {
-            const caps = detectBackend({ capabilities: { 'sauce:visual': {} } })
+            const caps = detectBackend({}, { 'sauce:visual': {} })
             expect(typeof caps.hostname).toBe('undefined')
         })
 
+        it('should ignored if a capability set is passed', () => {
+            const caps = detectBackend({}, [{ 'sauce:visual': {} }])
+            expect(typeof caps.hostname).toBe('undefined')
+            const multicaps = detectBackend({}, { browserA: { capabilities: { 'sauce:visual': {} } } })
+            expect(typeof multicaps.hostname).toBe('undefined')
+        })
+
         it('should detect sauce visual if api key is existing', () => {
-            const caps = detectBackend({ capabilities: { 'sauce:visual': { apiKey: 'foobar' } } })
+            const caps = detectBackend({}, { 'sauce:visual': { apiKey: 'foobar' } })
             expect(caps.hostname).toBe('hub.screener.io')
             expect(caps.port).toBe(443)
             expect(caps.path).toBe('/wd/hub')

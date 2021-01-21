@@ -72,14 +72,16 @@ interface BackendConfigurations {
     region?: string
     headless?: boolean
     path?: string
-    capabilities?: Capabilities | WebDriver.DesiredCapabilities | WebDriver.W3CCapabilities
 }
 
 /**
  * helper to detect the Selenium backend according to given capabilities
  */
-export function detectBackend(options: BackendConfigurations = {}) {
-    let { port, hostname, user, key, protocol, region, headless, path, capabilities } = options
+export function detectBackend(
+    options: BackendConfigurations = {},
+    capabilities?: Capabilities | WebDriver.DesiredCapabilities | WebDriver.W3CCapabilities
+) {
+    let { port, hostname, user, key, protocol, region, headless, path } = options
 
     /**
      * browserstack
