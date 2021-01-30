@@ -45,6 +45,9 @@ export const DEFAULT_CONFIGS: () => Omit<Options.Testrunner, 'capabilities'> = (
     cucumberOpts: {
         timeout: DEFAULT_TIMEOUT
     },
+    tsNodeOpts: {
+        transpileOnly: true
+    },
 
     /**
      * hooks

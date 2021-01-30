@@ -42,10 +42,33 @@ describe('ConfigParser', () => {
                 process.env.THROW_BABEL_REGISTER = '1'
             })
 
-            it('should initiate TypeScript compiler if ts-node exists', () => {
+            it('should initiate TypeScript compiler if ts-node exists with defaults if no config provided', () => {
                 const configParser = new ConfigParser()
                 configParser.addConfigFile(FIXTURES_CONF_RDC)
                 expect(tsNode.register).toBeCalledTimes(1)
+                expect(tsNode.register).toHaveBeenCalledWith( { 'transpileOnly': true } )
+                expect(log.debug).toBeCalledTimes(1)
+                expect((log.debug as jest.Mock).mock.calls[0][0])
+                    .toContain('auto-compiling TypeScript files')
+            })
+
+            it('should initiate TypeScript compiler if ts-node exists with given config', () => {
+                const configParser = new ConfigParser()
+                const filePath = path.resolve(process.cwd(), FIXTURES_CONF_RDC)
+                const baseConfig = require(filePath).config
+                configParser.addConfigEntry({
+                    ...baseConfig,
+                    tsNodeOpts: {
+                        'ts-node': 'do this',
+                        'and': 'that'
+                    }
+                })
+                expect(tsNode.register).toBeCalledTimes(1)
+                expect(tsNode.register).toHaveBeenCalledWith( {
+                    'transpileOnly': true,
+                    'ts-node': 'do this',
+                    'and': 'that'
+                } )
                 expect(log.debug).toBeCalledTimes(1)
                 expect((log.debug as jest.Mock).mock.calls[0][0])
                     .toContain('auto-compiling TypeScript files')

@@ -90,6 +90,9 @@ export const cmdArgs = {
     },
     cucumberOpts: {
         desc: 'Cucumber options'
+    },
+    tsNodeOpts: {
+        desc: 'ts-node options'
     }
 } as const
 

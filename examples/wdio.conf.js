@@ -182,6 +182,14 @@ exports.config = {
         ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
     },
     //
+    // If you have ts-node installed, you can customize how options are passed to it here:
+    // See also: https://github.com/TypeStrong/ts-node#cli-and-programmatic-options
+    // See also RegisterOptions in https://github.com/TypeStrong/ts-node/blob/master/src/index.ts
+    tsNodeOpts: {
+        transpileOnly: true,
+        project: 'tsconfig.json'
+    },
+    //
     // =====
     // Hooks
     // =====

@@ -403,6 +403,7 @@ export interface Testrunner extends Hooks, Omit<WebdriverIO, 'capabilities'>, We
     mochaOpts?: WebdriverIO.MochaOpts
     jasmineOpts?: WebdriverIO.JasmineOpts
     cucumberOpts?: WebdriverIO.CucumberOpts
+    tsNodeOpts?: WebdriverIO.TsNodeOpts
 }
 
 export interface MultiRemote extends Omit<Testrunner, 'capabilities'> {

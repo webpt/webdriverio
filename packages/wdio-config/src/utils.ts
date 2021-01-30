@@ -1,5 +1,6 @@
 import logger from '@wdio/logger'
 import type { Capabilities, Options } from '@wdio/types'
+import { RegisterOptions } from 'ts-node'
 
 const log = logger('@wdio/config:utils')
 
@@ -220,10 +221,10 @@ export function validateConfig<T>(defaults: Options.Definition<T>, options: T, k
     return params
 }
 
-export function loadTypeScriptCompiler () {
+export function loadTypeScriptCompiler (tsNodeOpts?: WebdriverIO.TsNodeOpts) {
     try {
         require.resolve('ts-node')
-        require('ts-node').register({ transpileOnly: true })
+        require('ts-node').register(tsNodeOpts as RegisterOptions)
         log.debug('Found \'ts-node\' package, auto-compiling TypeScript files')
         return true
     } catch (e) {

@@ -42,17 +42,27 @@ export default class ConfigParser {
         const filePath = path.resolve(process.cwd(), filename)
 
         try {
-            /**
-             * compile files if Babel or TypeScript are installed
-             */
-            if (!loadTypeScriptCompiler() && !loadBabelCompiler()) {
-                log.debug('No compiler found, continue without compiling files')
-            }
+            this.addConfigEntry(require(filePath).config)
+        } catch (e) {
+            log.error(`Failed loading configuration file: ${filePath}:`, e.message)
+            throw e
+        }
+    }
 
+    /**
+     * merges config object with default values
+     * @param {Object} config config object
+     */
+    addConfigEntry (config: TestrunnerOptionsWithParameters) {
+        if (typeof config !== 'object') {
+            throw new Error('addConfigEntry requires config')
+        }
+
+        try {
             /**
              * clone the original config
              */
-            const fileConfig = merge<Omit<Options.Testrunner, 'capabilities'> & { capabilities?: Capabilities.RemoteCapabilities }>(require(filePath).config, {}, MERGE_OPTIONS)
+            const fileConfig = merge<Omit<Options.Testrunner, 'capabilities'> & { capabilities?: Capabilities.RemoteCapabilities }>(config, {}, MERGE_OPTIONS)
 
             /**
              * merge capabilities
@@ -78,11 +88,18 @@ export default class ConfigParser {
             this._config = merge(detectBackend(this._config), this._config, MERGE_OPTIONS)
 
             /**
+             * compile files if Babel or TypeScript are installed
+             */
+            if (!loadTypeScriptCompiler(this._config.tsNodeOpts) && !loadBabelCompiler()) {
+                log.debug('No compiler found, continue without compiling files')
+            }
+
+            /**
              * remove `watch` from config as far as it can be only passed as command line argument
              */
             delete this._config.watch
         } catch (e) {
-            log.error(`Failed loading configuration file: ${filePath}:`, e.message)
+            log.error('Failed loading configuration block')
             throw e
         }
     }
