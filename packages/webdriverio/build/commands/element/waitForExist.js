@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function waitForExist({ timeout = this.options.waitforTimeout, interval = this.options.waitforInterval, reverse = false, timeoutMsg = `element ("${this.selector}") still ${reverse ? '' : 'not '}existing after ${timeout}ms` } = {}) {
+    return this.waitUntil(async () => reverse !== await this.isExisting(), { timeout, interval, timeoutMsg });
+}
+exports.default = waitForExist;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2FpdEZvckV4aXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL2NvbW1hbmRzL2VsZW1lbnQvd2FpdEZvckV4aXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBc0NBLFNBQXdCLFlBQVksQ0FFaEMsRUFDSSxPQUFPLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxjQUFjLEVBQ3JDLFFBQVEsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLGVBQWUsRUFDdkMsT0FBTyxHQUFHLEtBQUssRUFDZixVQUFVLEdBQUcsYUFBYSxJQUFJLENBQUMsUUFBUSxZQUFZLE9BQU8sQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLGtCQUFrQixPQUFPLElBQUksS0FDckYsRUFBRTtJQUV0QixPQUFPLElBQUksQ0FBQyxTQUFTLENBQ2pCLEtBQUssSUFBSSxFQUFFLENBQUMsT0FBTyxLQUFLLE1BQU0sSUFBSSxDQUFDLFVBQVUsRUFBRSxFQUMvQyxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsVUFBVSxFQUFFLENBQ3BDLENBQUE7QUFDTCxDQUFDO0FBYkQsK0JBYUMifQ==

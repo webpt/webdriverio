@@ -63,7 +63,7 @@ tests/typings/**/dist
 # lerna changelog cachedir
 .changelog
 
-**/build
+#**/build
 /*.js
 devtools.d.ts
 !.eslintrc.js

@@ -1,0 +1,2 @@
+export default function getCookies(this: WebdriverIO.Browser | WebdriverIO.MultiRemoteBrowser, names?: string | string[]): Promise<import("@wdio/protocols").Cookie[]>;
+//# sourceMappingURL=getCookies.d.ts.map

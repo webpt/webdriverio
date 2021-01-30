@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function getElementCSSValue(_, elem, propertyName) {
+    return window.getComputedStyle(elem)[propertyName];
+}
+exports.default = getElementCSSValue;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0RWxlbWVudENTU1ZhbHVlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL3NjcmlwdHMvZ2V0RWxlbWVudENTU1ZhbHVlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsU0FBd0Isa0JBQWtCLENBQUUsQ0FBYyxFQUFFLElBQWlCLEVBQUUsWUFBb0I7SUFJL0YsT0FBUSxNQUFNLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFTLENBQUMsWUFBWSxDQUFDLENBQUE7QUFDL0QsQ0FBQztBQUxELHFDQUtDIn0=

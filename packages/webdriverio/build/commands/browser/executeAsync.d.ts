@@ -1,0 +1,2 @@
+export default function executeAsync<T extends any[], U extends T>(this: WebdriverIO.Browser | WebdriverIO.Element | WebdriverIO.MultiRemoteBrowser, script: string | ((...args: [...T: any, callback: () => void]) => void), ...args: U): Promise<T>;
+//# sourceMappingURL=executeAsync.d.ts.map

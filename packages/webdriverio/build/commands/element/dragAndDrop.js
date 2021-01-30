@@ -1,0 +1,56 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const utils_1 = require("../../utils");
+const ACTION_BUTTON = 0;
+const sleep = (time = 0) => new Promise((resolve) => setTimeout(resolve, time));
+async function dragAndDrop(target, { duration = 10 } = {}) {
+    const moveToCoordinates = target;
+    const moveToElement = target;
+    if (!target ||
+        (target.constructor.name !== 'Element' &&
+            (typeof moveToCoordinates.x !== 'number' ||
+                typeof moveToCoordinates.y !== 'number'))) {
+        throw new Error('command dragAndDrop requires an WebdriverIO Element or and object with "x" and "y" variables as first parameter');
+    }
+    const isMovingToElement = target.constructor.name === 'Element';
+    if (!this.isW3C) {
+        await this.moveTo();
+        await this.buttonDown(ACTION_BUTTON);
+        if (isMovingToElement) {
+            await moveToElement.moveTo();
+        }
+        else {
+            await this.moveToElement(null, moveToCoordinates.x, moveToCoordinates.y);
+        }
+        await sleep(duration);
+        return this.buttonUp(ACTION_BUTTON);
+    }
+    const { scrollX, scrollY } = await utils_1.getScrollPosition(this);
+    const sourceRect = await utils_1.getElementRect(this);
+    const sourceX = Math.floor(sourceRect.x - scrollX + (sourceRect.width / 2));
+    const sourceY = Math.floor(sourceRect.y - scrollY + (sourceRect.height / 2));
+    let targetX, targetY;
+    if (isMovingToElement) {
+        const targetRect = await utils_1.getElementRect(moveToElement);
+        targetX = Math.floor(targetRect.x - scrollX + (targetRect.width / 2) - sourceX);
+        targetY = Math.floor(targetRect.y - scrollY + (targetRect.height / 2) - sourceY);
+    }
+    else {
+        targetX = moveToCoordinates.x;
+        targetY = moveToCoordinates.y;
+    }
+    return this.performActions([{
+            type: 'pointer',
+            id: 'finger1',
+            parameters: { pointerType: 'mouse' },
+            actions: [
+                { type: 'pointerMove', duration: 0, x: sourceX, y: sourceY },
+                { type: 'pointerDown', button: ACTION_BUTTON },
+                { type: 'pause', duration: 10 },
+                { type: 'pointerMove', duration, origin: 'pointer', x: targetX, y: targetY },
+                { type: 'pointerUp', button: ACTION_BUTTON }
+            ]
+        }]).then(() => this.releaseActions());
+}
+exports.default = dragAndDrop;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZHJhZ0FuZERyb3AuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvY29tbWFuZHMvZWxlbWVudC9kcmFnQW5kRHJvcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUErRDtBQUUvRCxNQUFNLGFBQWEsR0FBRyxDQUFDLENBQUE7QUFFdkIsTUFBTSxLQUFLLEdBQUcsQ0FBQyxJQUFJLEdBQUcsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFLENBQUMsVUFBVSxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUMsQ0FBQyxDQUFBO0FBMENoRSxLQUFLLFVBQVUsV0FBVyxDQUVyQyxNQUFnRCxFQUNoRCxFQUFFLFFBQVEsR0FBRyxFQUFFLEtBQXlCLEVBQUU7SUFFMUMsTUFBTSxpQkFBaUIsR0FBRyxNQUE0QixDQUFBO0lBQ3RELE1BQU0sYUFBYSxHQUFHLE1BQTZCLENBQUE7SUFLbkQsSUFJSSxDQUFDLE1BQU07UUFDUCxDQUlJLE1BQU0sQ0FBQyxXQUFXLENBQUMsSUFBSSxLQUFLLFNBQVM7WUFJckMsQ0FDSSxPQUFPLGlCQUFpQixDQUFDLENBQUMsS0FBSyxRQUFRO2dCQUN2QyxPQUFPLGlCQUFpQixDQUFDLENBQUMsS0FBSyxRQUFRLENBQzFDLENBQ0osRUFDSDtRQUNFLE1BQU0sSUFBSSxLQUFLLENBQUMsaUhBQWlILENBQUMsQ0FBQTtLQUNySTtJQUtELE1BQU0saUJBQWlCLEdBQUcsTUFBTSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEtBQUssU0FBUyxDQUFBO0lBRS9ELElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFO1FBQ2IsTUFBTSxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUE7UUFDbkIsTUFBTSxJQUFJLENBQUMsVUFBVSxDQUFDLGFBQWEsQ0FBQyxDQUFBO1FBRXBDLElBQUksaUJBQWlCLEVBQUU7WUFDbkIsTUFBTSxhQUFhLENBQUMsTUFBTSxFQUFFLENB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

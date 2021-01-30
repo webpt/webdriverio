@@ -1,0 +1,1 @@
+{"version":3,"file":"mock.d.ts","sourceRoot":"","sources":["../../../src/commands/browser/mock.ts"],"names":[],"mappings":"AAIA,OAAO,KAAK,EAAE,IAAI,EAAE,MAAM,aAAa,CAAA;AACvC,OAAO,KAAK,EAAE,iBAAiB,EAAE,MAAM,gCAAgC,CAAA;AA2GvE,wBAA8B,IAAI,CAC9B,IAAI,EAAE,WAAW,CAAC,OAAO,GAAG,WAAW,CAAC,kBAAkB,EAC1D,GAAG,EAAE,MAAM,EACX,aAAa,CAAC,EAAE,iBAAiB,iBA6DpC"}

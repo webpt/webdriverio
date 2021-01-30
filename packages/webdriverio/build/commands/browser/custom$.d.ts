@@ -1,0 +1,2 @@
+export default function custom$(this: WebdriverIO.Browser | WebdriverIO.MultiRemoteBrowser, strategyName: string, ...strategyArguments: any[]): Promise<WebdriverIO.Element>;
+//# sourceMappingURL=custom$.d.ts.map

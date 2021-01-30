@@ -1,0 +1,1 @@
+{"version":3,"file":"deleteCookies.d.ts","sourceRoot":"","sources":["../../../src/commands/browser/deleteCookies.ts"],"names":[],"mappings":"AA2CA,MAAM,CAAC,OAAO,UAAU,aAAa,CACjC,IAAI,EAAE,WAAW,CAAC,OAAO,GAAG,WAAW,CAAC,kBAAkB,EAC1D,KAAK,CAAC,EAAE,MAAM,GAAG,MAAM,EAAE,mCAa5B"}

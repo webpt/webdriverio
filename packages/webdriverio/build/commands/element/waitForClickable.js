@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+async function waitForClickable({ timeout = this.options.waitforTimeout, interval = this.options.waitforInterval, reverse = false, timeoutMsg = `element ("${this.selector}") still ${reverse ? '' : 'not '}clickable after ${timeout}ms` } = {}) {
+    return this.waitUntil(async () => reverse !== await this.isClickable(), { timeout, timeoutMsg, interval });
+}
+exports.default = waitForClickable;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2FpdEZvckNsaWNrYWJsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb21tYW5kcy9lbGVtZW50L3dhaXRGb3JDbGlja2FibGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUEyQmUsS0FBSyxVQUFVLGdCQUFnQixDQUUxQyxFQUNJLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLGNBQWMsRUFDckMsUUFBUSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsZUFBZSxFQUN2QyxPQUFPLEdBQUcsS0FBSyxFQUNmLFVBQVUsR0FBRyxhQUFhLElBQUksQ0FBQyxRQUFRLFlBQVksT0FBTyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLE1BQU0sbUJBQW1CLE9BQU8sSUFBSSxLQUN0RixFQUFFO0lBRXRCLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FDakIsS0FBSyxJQUFJLEVBQUUsQ0FBQyxPQUFPLEtBQUssTUFBTSxJQUFJLENBQUMsV0FBVyxFQUFFLEVBQ2hELEVBQUUsT0FBTyxFQUFFLFVBQVUsRUFBRSxRQUFRLEVBQUUsQ0FDcEMsQ0FBQTtBQUNMLENBQUM7QUFiRCxtQ0FhQyJ9

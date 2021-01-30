@@ -1,0 +1,2 @@
+export default function deleteCookies(this: WebdriverIO.Browser | WebdriverIO.MultiRemoteBrowser, names?: string | string[]): Promise<void> | Promise<void[]>;
+//# sourceMappingURL=deleteCookies.d.ts.map
